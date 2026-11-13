@@ -6,6 +6,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
 
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
@@ -24,7 +25,11 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
+  // Pages stay static (prerendered); only routes that opt out with
+  // `export const prerender = false` (src/pages/api/contact.ts) run as
+  // Vercel serverless functions.
   output: 'static',
+  adapter: vercel(),
 
   // Prefetch links as they enter the viewport for snappier navigations
   // (works together with <ClientRouter />, which enables prefetch by default).

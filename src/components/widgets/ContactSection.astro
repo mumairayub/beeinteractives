@@ -9,14 +9,11 @@ export interface Props {
 const { formTitle = 'Get Your Free Strategy Consultation' } = Astro.props;
 
 /*
- * Submissions are emailed via FormSubmit (https://formsubmit.co) — no account
- * needed. The first submission triggers an activation email to this address;
- * after clicking "Activate", every submission is forwarded.
- * Tip: after activation FormSubmit offers a random alias you can use here
- * instead of the plain address, so the address isn't visible in the page source.
+ * Submissions go to the /api/contact server route, which emails them via
+ * Resend (see src/pages/api/contact.ts). The destination address lives in the
+ * CONTACT_TO_EMAIL environment variable, so it never appears in the page.
  */
-const FORM_EMAIL = 'umair.numl@gmail.com';
-const formAction = `https://formsubmit.co/${FORM_EMAIL}`;
+const formAction = '/api/contact';
 const pagePath = Astro.url.pathname;
 ---
 
@@ -55,12 +52,9 @@ const pagePath = Astro.url.pathname;
     <div class="rounded-3xl bg-white p-6 sm:p-10 shadow-2xl dark:bg-slate-900">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white">{formTitle}</h3>
       <form class="mt-6 space-y-6" method="post" action={formAction} data-contact-form>
-        <!-- FormSubmit settings -->
-        <input type="hidden" name="_subject" value={`New enquiry from your website (${formTitle})`} />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
+        <!-- Context for the email -->
+        <input type="hidden" name="topic" value={formTitle} />
         <input type="hidden" name="page" value={pagePath} />
-        <input type="hidden" name="_next" value="" data-next />
         <!-- Spam trap: real visitors never see or fill this -->
         <input
           type="text"
@@ -68,7 +62,7 @@ const pagePath = Astro.url.pathname;
           tabindex="-1"
           autocomplete="off"
           aria-hidden="true"
-          class="absolute -left-[9999px] h-px w-px opacity-0"
+          class="absolute left-[-9999px] h-px w-px opacity-0"
         />
         <div>
           <label for="contact-name" class="sr-only">First name</label>
@@ -118,23 +112,66 @@ const pagePath = Astro.url.pathname;
         </label>
         <button
           type="submit"
-          class="rounded-xl bg-yellow-400 px-16 py-4 text-base font-bold uppercase tracking-wide text-slate-900 transition hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
+          data-submit
+          class="rounded-xl bg-yellow-400 px-16 py-4 text-base font-bold uppercase tracking-wide text-slate-900 transition hover:bg-yellow-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400 disabled:cursor-wait disabled:opacity-70"
         >
           Send
         </button>
+        <p data-status role="status" aria-live="polite" class="hidden rounded-lg px-4 py-3 text-sm font-medium"></p>
       </form>
     </div>
   </div>
 </section>
 
 <script>
-  // After sending, FormSubmit redirects to `_next`; it needs an absolute URL,
-  // so it's filled in from the current site address at runtime.
-  const setNext = () => {
-    document.querySelectorAll<HTMLInputElement>('[data-contact-form] [data-next]').forEach((input) => {
-      input.value = `${window.location.origin}/thank-you`;
+  // Progressive enhancement: send in the background and show the result in the
+  // card. Without JavaScript the form still posts normally and the server
+  // redirects to /thank-you.
+  const STATUS_OK = 'block bg-green-50 text-green-800 dark:bg-green-900/40 dark:text-green-200';
+  const STATUS_ERR = 'block bg-red-50 text-red-800 dark:bg-red-900/40 dark:text-red-200';
+
+  const setup = () => {
+    document.querySelectorAll<HTMLFormElement>('form[data-contact-form]').forEach((form) => {
+      if (form.dataset.enhanced) return;
+      form.dataset.enhanced = 'true';
+      const button = form.querySelector<HTMLButtonElement>('[data-submit]');
+      const status = form.querySelector<HTMLElement>('[data-status]');
+      const show = (ok: boolean, text: string) => {
+        if (!status) return;
+        status.className = `rounded-lg px-4 py-3 text-sm font-medium ${ok ? STATUS_OK : STATUS_ERR}`;
+        status.textContent = text;
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (button) {
+          button.disabled = true;
+          button.textContent = 'Sending…';
+        }
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' },
+          });
+          const data = (await res.json().catch(() => ({}))) as { ok?: boolean; message?: string };
+          if (res.ok && data.ok) {
+            form.reset();
+            show(true, "Thank you! Your message has been sent — I'll get back to you shortly.");
+          } else {
+            show(false, data.message || 'Sorry, something went wrong. Please try again.');
+          }
+        } catch {
+          show(false, 'Network error — please check your connection and try again.');
+        } finally {
+          if (button) {
+            button.disabled = false;
+            button.textContent = 'Send';
+          }
+        }
+      });
     });
   };
-  setNext();
-  document.addEventListener('astro:page-load', setNext);
+  setup();
+  document.addEventListener('astro:page-load', setup);
 </script>
