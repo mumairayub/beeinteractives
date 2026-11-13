@@ -1,0 +1,128 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+
+// Client logos for the sliding "Trusted by" strip.
+// Every logo is dark-on-light (the `-mono` files are transparent versions of
+// logos that originally sat on a dark background), so one grey treatment fits all.
+const clients = [
+  { file: 'ghosheh-law-firm-mono.png', name: 'Ghosheh Law Firm', width: 803, height: 564 },
+  { file: 'family-medicine-austin.jpg', name: 'Family Medicine Austin', width: 340, height: 244 },
+  { file: 'arthur-lawrence.png', name: 'Arthur Lawrence', width: 304, height: 127 },
+  { file: 'onecontentpro-mono.png', name: 'OneContentPro', width: 453, height: 108 },
+  { file: 'vista-book-writing-mono.png', name: 'Vista Book Writing', width: 968, height: 1079 },
+  { file: 'domyebook.jpg', name: 'DoMyEbook.com', width: 414, height: 153 },
+  { file: 'texas-office-coffee.png', name: 'Texas Office Coffee', width: 157, height: 150 },
+  { file: 'biotherm-mono.png', name: 'BioTherm', width: 174, height: 35 },
+  { file: 'client-w.jpg', name: 'Client logo', width: 183, height: 200 },
+  { file: 'aix-mono.png', name: 'ai.x', width: 280, height: 144 },
+].map((c) => ({ ...c, src: `~/assets/images/portfolio/clients/${c.file}` }));
+
+// Certification / platform badges shown under the client logos.
+// `icon` omitted = draw a simple lettermark (no Contra icon exists in the icon sets).
+const badges = [
+  { label: 'Certified', name: 'Google Ads', icon: 'flat-color-icons:google', color: '#4285F4' },
+  { label: 'Certified', name: 'Meta Ads', icon: 'tabler:brand-meta', color: '#0866FF' },
+  { label: 'Certified', name: 'Bing Ads', icon: 'tabler:brand-bing', color: '#008373' },
+  { label: 'Freelancer on', name: 'Upwork', icon: 'tabler:brand-upwork', color: '#14A800' },
+  { label: 'Freelancer on', name: 'Contra', icon: undefined, color: '#111111' },
+];
+---
+
+<section class="py-10 md:py-14 not-prose" aria-labelledby="clients-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+    <Icon name="tabler:shield-check-filled" class="mx-auto h-7 w-7 text-blue-700 dark:text-blue-400" />
+    <h2 id="clients-heading" class="mt-3 text-base md:text-lg font-bold tracking-tight text-heading">
+      Trusted by businesses across the US, Middle East and beyond.
+    </h2>
+  </div>
+
+  <div
+    class="client-marquee mt-8 flex overflow-hidden mask-[linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
+  >
+    {
+      [0, 1].map((copy) => (
+        <ul
+          class="client-track flex shrink-0 items-center gap-14 md:gap-20 pr-14 md:pr-20"
+          aria-hidden={copy === 1 ? 'true' : undefined}
+        >
+          {clients.map((client) => (
+            <li class="flex h-14 shrink-0 items-center">
+              <Image
+                src={client.src}
+                alt={copy === 1 ? '' : client.name}
+                width={client.width}
+                height={client.height}
+                loading="lazy"
+                layout="none"
+                class:list={[
+                  'h-12 w-auto max-w-[10rem] object-contain grayscale opacity-60 transition-opacity duration-300 hover:opacity-100',
+                  'mix-blend-multiply dark:invert dark:mix-blend-screen',
+                ]}
+              />
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+
+  <!-- Certifications & platforms -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div
+      class="mx-auto mt-12 mb-10 h-px max-w-4xl bg-gradient-to-r from-transparent via-slate-300 to-transparent dark:via-slate-700"
+      aria-hidden="true"
+    >
+    </div>
+    <h3 class="sr-only">Certifications and platforms</h3>
+    <ul class="flex flex-wrap items-stretch justify-center gap-4 md:gap-5">
+      {
+        badges.map((badge) => (
+          <li
+            class="flex min-w-[11.5rem] items-center gap-3 rounded-xl border-2 bg-white px-4 py-3 shadow-sm dark:bg-slate-900"
+            style={`border-color: ${badge.color}`}
+          >
+            {badge.icon ? (
+              <Icon name={badge.icon} class="h-9 w-9 shrink-0" style={`color: ${badge.color}`} />
+            ) : (
+              <span
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-black text-lg font-black text-white dark:bg-white dark:text-black"
+                aria-hidden="true"
+              >
+                C
+              </span>
+            )}
+            <span class="text-left leading-tight">
+              <span class="block text-[0.7rem] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                {badge.label}
+              </span>
+              <span class="block text-lg font-bold text-slate-900 dark:text-white">{badge.name}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .client-track {
+    animation: client-scroll 45s linear infinite;
+  }
+  .client-marquee:hover .client-track {
+    animation-play-state: paused;
+  }
+  @keyframes client-scroll {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .client-track {
+      animation: none;
+    }
+    .client-marquee {
+      overflow-x: auto;
+    }
+  }
+</style>

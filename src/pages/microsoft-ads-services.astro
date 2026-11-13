@@ -1,0 +1,391 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import ClientLogos from '~/components/widgets/ClientLogos.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Projects from '~/components/widgets/Projects.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import ContactSection from '~/components/widgets/ContactSection.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+/*
+ * Microsoft Ads (Bing) Services page. Structure modelled on an agency
+ * Microsoft Ads page: hero → promise + stats → trust logos → "inside and out"
+ * checklist → capabilities → results → audit CTA → 6-step process → levers →
+ * contact → FAQ → final CTA.
+ * Numbers come from Umair's own Microsoft Advertising / Google Ads screenshots.
+ */
+
+const metadata = {
+  title: 'Microsoft Ads Management Services (Bing Ads)',
+  description:
+    'Microsoft Advertising (Bing Ads) management by Umair Ayub: intent-first search campaigns, LinkedIn profile targeting, Shopping and conversion tracking — run directly by a specialist with 10+ years of PPC experience.',
+};
+
+const auditCta = { variant: 'primary' as const, text: 'Get a free Microsoft Ads audit', href: '#contact' };
+---
+
+<Layout metadata={metadata}>
+  <!-- 1. Hero ************************** -->
+
+  <section class="relative overflow-hidden bg-slate-950 text-white not-prose">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-40 -left-40 h-130 w-130 rounded-full bg-teal-500/25 blur-3xl"></div>
+      <div class="absolute -bottom-48 right-0 h-140 w-140 rounded-full bg-blue-600/30 blur-3xl"></div>
+      <div
+        class="absolute inset-0 opacity-[0.07] bg-[linear-gradient(white_1px,transparent_1px),linear-gradient(90deg,white_1px,transparent_1px)] bg-size-[56px_56px]"
+      >
+      </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24 grid gap-12 lg:grid-cols-2 items-center">
+      <div class="text-center lg:text-left">
+        <p
+          class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs sm:text-sm font-semibold uppercase tracking-widest text-teal-300"
+        >
+          <Icon name="tabler:brand-bing" class="h-4 w-4" />
+          Microsoft Advertising (Bing Ads)
+        </p>
+        <h1
+          class="mt-6 font-heading font-extrabold uppercase leading-[0.95] tracking-tight text-4xl sm:text-6xl xl:text-7xl"
+        >
+          Scale your business<br />
+          with <span class="bg-linear-to-r from-teal-300 to-blue-400 bg-clip-text text-transparent">Microsoft Ads</span>
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto lg:mx-0 text-lg text-slate-300">
+          Unlock search demand your competitors are ignoring. Bing, Yahoo, MSN and partner sites reach high-intent
+          buyers — often at lower costs per click than Google.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+          <a
+            href="#contact"
+            class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-4 text-base font-bold uppercase tracking-wide text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+          >
+            Become a client
+            <Icon name="tabler:arrow-right" class="h-5 w-5" />
+          </a>
+          <span class="inline-flex items-center gap-2 text-sm text-slate-300">
+            <Icon name="tabler:circle-check-filled" class="h-5 w-5 text-emerald-400" />
+            Certified in Bing Ads
+          </span>
+        </div>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-2xl">
+        <div
+          class="absolute -inset-3 rounded-4xl bg-linear-to-br from-teal-400 via-blue-500 to-blue-700 opacity-50 blur-xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="relative overflow-hidden rounded-4xl border border-white/10 bg-white shadow-2xl">
+          <Image
+            src="~/assets/images/portfolio/results/microsoft-ads-overview.jpg"
+            alt="Microsoft Advertising overview: $9,636 spend, 3,450 clicks, 825 conversions and 391,948 impressions"
+            width={1903}
+            height={572}
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Promise + stats *************** -->
+
+  <Stats
+    title="No account managers. No junior specialists."
+    subtitle="You work directly with me — the specialist who plans, builds and optimises your Microsoft Ads account from start to finish."
+    countUp
+    stats={[
+      { amount: '10+', title: 'Years of PPC experience' },
+      { amount: '825', title: 'Conversions in one Microsoft Ads account' },
+      { amount: '391K', title: 'Impressions on Bing & partners' },
+    ]}
+  />
+
+  <!-- 3. Trust logos ******************* -->
+
+  <ClientLogos />
+
+  <!-- 4. Inside and out **************** -->
+
+  <Content
+    tagline="Microsoft Ads expertise"
+    title="I know Microsoft Ads inside and out"
+    image={{
+      src: '~/assets/images/portfolio/results/microsoft-ads-overview.jpg',
+      alt: 'Microsoft Advertising performance overview',
+      aspect: 'auto',
+    }}
+    items={[
+      { title: 'Bing search intent is different from Google — keywords need their own plan', icon: 'tabler:check' },
+      { title: 'LinkedIn profile targeting can lift lead quality when used carefully', icon: 'tabler:check' },
+      { title: 'I know where budget leaks when an account is left on autopilot', icon: 'tabler:check' },
+      { title: 'Shopping campaigns need their own feed, bids and optimisation', icon: 'tabler:check' },
+    ]}
+  >
+    <Fragment slot="content">
+      Microsoft Ads is not just "Google Ads, but cheaper". The audience, search behaviour and settings are different —
+      and copying a Google account across without changes usually wastes money. Done properly, it's one of the best
+      returns in PPC.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- 5. Capabilities ****************** -->
+
+  <Features2
+    tagline="Why choose me"
+    title="Everything your Microsoft Ads account needs"
+    columns={3}
+    items={[
+      {
+        title: 'Expertise across the network',
+        description: 'Campaigns that reach searchers on Bing, Yahoo, MSN and Microsoft partner sites.',
+        icon: 'tabler:world',
+      },
+      {
+        title: 'Full strategy & management',
+        description: 'From research and setup to daily optimisation and reporting — handled by one specialist.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Structure & continuous testing',
+        description:
+          'Search, Shopping, Performance Max and Audience campaigns structured for control and tested regularly.',
+        icon: 'tabler:flask',
+      },
+      {
+        title: 'Data-driven optimisation',
+        description: 'Decisions based on cost per acquisition, ROAS and lead quality — not clicks or impressions.',
+        icon: 'tabler:chart-dots',
+      },
+      {
+        title: 'Microsoft Shopping',
+        description: 'Product feeds and Shopping campaigns set up and optimised for online stores.',
+        icon: 'tabler:shopping-cart',
+      },
+      {
+        title: 'Works alongside Google Ads',
+        description:
+          'Microsoft Ads planned together with your Google Ads, so both channels pull in the same direction.',
+        icon: 'tabler:arrows-exchange',
+      },
+    ]}
+  />
+
+  <!-- 6. Results *********************** -->
+
+  <Projects
+    id="results"
+    tagline="Case results"
+    title="Search ads results"
+    subtitle="Screenshots from live Microsoft Advertising and Google Ads accounts I have managed."
+    items={[
+      {
+        title: 'Microsoft Ads account',
+        description: '$9,636 spent for 3,450 clicks and 391,948 impressions across Bing and partner sites.',
+        image: {
+          src: '~/assets/images/portfolio/results/microsoft-ads-overview.jpg',
+          alt: 'Microsoft Advertising account overview',
+        },
+        tags: ['Microsoft Ads', 'Search'],
+        result: '825 conversions',
+      },
+      {
+        title: 'Google Ads account: $134K spend',
+        description: '$134K managed at a $2.75 average CPC, producing 48.6K clicks.',
+        image: {
+          src: '~/assets/images/portfolio/results/account-overview-134k.png',
+          alt: 'Google Ads overview showing $134K cost and 41.5K conversions',
+        },
+        tags: ['Google Ads', 'Scale'],
+        result: '41.5K conversions',
+      },
+      {
+        title: 'Family Medicine Austin',
+        description: 'Search, call and display campaigns for a healthcare clinic: $64,289 spend, 23,410 clicks.',
+        image: {
+          src: '~/assets/images/portfolio/results/family-medicine-austin-campaigns.png',
+          alt: 'Google Ads campaign summary for Family Medicine Austin',
+        },
+        tags: ['Healthcare', 'Google Ads'],
+        result: 'Up to 10.05% CTR',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Projects>
+
+  <!-- 7. Audit CTA ********************* -->
+
+  <CallToAction
+    title="Get your free Microsoft Ads audit"
+    subtitle="Already running Bing Ads — or wondering if you should? I'll review your account or opportunity and tell you honestly."
+    actions={[auditCta]}
+  />
+
+  <!-- 8. Process *********************** -->
+
+  <Steps
+    tagline="Process"
+    title="How I run Microsoft Ads"
+    subtitle="One rule: control intent, measure quality, and scale only what proves itself."
+    items={[
+      {
+        title: 'Step 1: Fit-check call',
+        description: 'We decide together whether Microsoft Ads is worth it for your business. No hard sell.',
+        icon: 'tabler:phone-call',
+      },
+      {
+        title: 'Step 2: Audit',
+        description:
+          'Structure, search terms, Shopping feed, bidding, audiences and LinkedIn targeting, and conversion tracking.',
+        icon: 'tabler:zoom-check',
+      },
+      {
+        title: 'Step 3: Strategy',
+        description: 'A search-first plan, with campaigns split by intent so budget follows the best searches.',
+        icon: 'tabler:sitemap',
+      },
+      {
+        title: 'Step 4: Clean setup',
+        description:
+          'A proper build — no blind imports from Google without clean-up, and low-quality placements switched off.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Step 5: Management',
+        description:
+          'Close checks in the first weeks, then ongoing optimisation based on search intent, lead quality and sales feedback.',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: 'Step 6: Scaling',
+        description:
+          'Expanding proven themes, raising budgets only where quality holds, and adding LinkedIn targeting or Shopping.',
+        icon: 'tabler:trending-up',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/portfolio/microsoft-ads-process.webp',
+      alt: 'Microsoft Ads process in four real screenshots: account performance audit, search terms review, Google import recommendation, and Bing traffic tracked in analytics',
+    }}
+  />
+
+  <!-- 9. Levers ************************ -->
+
+  <Features3
+    tagline="What I optimise"
+    title="The levers that drive Microsoft Ads results"
+    columns={3}
+    items={[
+      {
+        title: 'Search intent & negatives',
+        description: 'Tight keyword targeting and disciplined negative keywords to stop wasted clicks.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Low-quality traffic off',
+        description: 'Placements and partner traffic that don’t convert are switched off or tightly controlled.',
+        icon: 'tabler:filter-off',
+      },
+      {
+        title: 'LinkedIn profile targeting',
+        description: 'Targeting by company, industry and job function — used carefully to lift lead quality.',
+        icon: 'tabler:brand-linkedin',
+      },
+      {
+        title: 'Shopping feed control',
+        description: 'Clean product data and feed structure so the right products show for the right searches.',
+        icon: 'tabler:shopping-cart',
+      },
+      {
+        title: 'Budgets & bidding logic',
+        description: 'Bid strategies chosen and checked deliberately — not left to automation unchecked.',
+        icon: 'tabler:coin',
+      },
+      {
+        title: 'Offline conversions & CRM signals',
+        description: 'Feeding real sales and qualified leads back into the account so it optimises for revenue.',
+        icon: 'tabler:database',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features3>
+
+  <!-- 10. Contact ********************** -->
+
+  <ContactSection formTitle="Book a free Microsoft Ads consultation" />
+
+  <!-- 11. FAQ ************************** -->
+
+  <FAQs
+    tagline="FAQ"
+    title="Microsoft Ads FAQs"
+    schema
+    items={[
+      {
+        title: 'Does Microsoft Ads make sense if I already run Google Ads?',
+        description:
+          'Usually, yes. Costs per click are often lower and competition is lighter, so it can add profitable leads and sales on top of Google.',
+      },
+      {
+        title: 'Is Microsoft Ads a good investment?',
+        description:
+          'For many businesses it is — especially B2B, professional services and ecommerce, where Bing’s audience tends to be older and higher-earning.',
+      },
+      {
+        title: 'What budget do I need?',
+        description:
+          'Microsoft Ads can work at many budget levels. I’ll recommend a sensible starting budget based on your market after a quick review.',
+      },
+      {
+        title: 'Does it work for service businesses?',
+        description:
+          'Yes. Professional and local services — legal, healthcare, home services and more — often do well.',
+      },
+      {
+        title: 'Do you use the Microsoft Audience Network?',
+        description:
+          'Not by default. Partner and audience placements are only used when they are tested and proven to convert.',
+      },
+      {
+        title: 'Can you just import my Google Ads campaigns?',
+        description:
+          'Importing is a starting point at best. Bing search behaviour is different, so imported campaigns need cleaning up and adjusting first.',
+      },
+      {
+        title: 'How do you charge?',
+        description: 'Pricing depends on the size and complexity of your account. Get in touch for a quote.',
+      },
+    ]}
+  />
+
+  <!-- 12. Final CTA ******************** -->
+
+  <CallToAction
+    title="Ready to unlock Microsoft Ads?"
+    subtitle="Book a free audit and find out how much extra demand Bing could bring your business."
+    actions={[auditCta]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </CallToAction>
+</Layout>

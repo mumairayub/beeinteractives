@@ -1,0 +1,187 @@
+---
+import { Icon } from 'astro-icon/components';
+import { SITE } from 'astrowind:config';
+import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
+
+/*
+ * Site-wide black footer: brand + contact + socials, Quick Links, Services,
+ * and certification badges with a one-line description.
+ */
+
+const quickLinks = [
+  { text: 'Home', href: getPermalink('/') },
+  { text: 'About', href: getPermalink('/#about') },
+  { text: 'Case', href: getPermalink('/#results') },
+  { text: 'Blog', href: getBlogPermalink() },
+  { text: 'Contact', href: getPermalink('/#contact') },
+];
+
+const services = [
+  { text: 'Google Ads', href: getPermalink('/google-ads-services') },
+  { text: 'Microsoft Ads', href: getPermalink('/microsoft-ads-services') },
+  { text: 'Meta Ads', href: getPermalink('/meta-ads-services') },
+];
+
+const contactLines = [
+  { icon: 'tabler:brand-linkedin', text: 'linkedin.com/in/umairayub', href: 'https://www.linkedin.com/in/umairayub/' },
+  { icon: 'tabler:mail', text: 'Send me a message', href: getPermalink('/#contact') },
+  { icon: 'tabler:map-pin', text: 'Working with clients in the US, Middle East and worldwide' },
+];
+
+const socials = [
+  {
+    label: 'Facebook',
+    icon: 'tabler:brand-facebook-filled',
+    href: 'https://www.facebook.com/mumairayub',
+    bg: '#1877F2',
+  },
+  {
+    label: 'LinkedIn',
+    icon: 'tabler:brand-linkedin-filled',
+    href: 'https://www.linkedin.com/in/umairayub/',
+    bg: '#0A66C2',
+  },
+  { label: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/umair_ayubb/', bg: '#E1306C' },
+  {
+    label: 'X (Twitter)',
+    icon: 'tabler:brand-x',
+    href: 'https://twitter.com/Umair_Ayub_',
+    bg: '#ffffff',
+    fg: '#000000',
+  },
+];
+
+const badges = [
+  { label: 'Certified', name: 'Google Ads', icon: 'flat-color-icons:google' },
+  { label: 'Certified', name: 'Meta Ads', icon: 'tabler:brand-meta', color: '#0866FF' },
+  { label: 'Certified', name: 'Bing Ads', icon: 'tabler:brand-bing', color: '#00A99D' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-black text-white not-prose">
+  <div
+    class="mx-auto max-w-7xl px-4 sm:px-6 py-14 md:py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_0.8fr_1.3fr]"
+  >
+    <!-- Brand, contact, socials -->
+    <div>
+      <a href={getPermalink('/')} class="inline-block text-3xl font-extrabold tracking-tight uppercase">
+        {SITE?.name}
+      </a>
+      <p class="mt-2 text-sm text-slate-400">Digital Marketing / Pay Per Click (PPC)</p>
+
+      <ul class="mt-8 space-y-4">
+        {
+          contactLines.map((line) => (
+            <li class="flex items-start gap-4">
+              <Icon name={line.icon} class="mt-0.5 h-5 w-5 shrink-0 text-yellow-400" />
+              {line.href ? (
+                <a
+                  href={line.href}
+                  class="font-medium hover:text-yellow-400"
+                  {...(line.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {line.text}
+                </a>
+              ) : (
+                <span class="font-medium">{line.text}</span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-10 text-lg font-bold">Follow Me</p>
+      <ul class="mt-4 flex gap-3">
+        {
+          socials.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                class="flex h-10 w-10 items-center justify-center rounded-full transition hover:scale-110"
+                style={`background:${s.bg};color:${s.fg ?? '#fff'}`}
+              >
+                <Icon name={s.icon} class="h-5 w-5" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <nav aria-label="Quick links">
+      <p class="text-lg font-bold">Quick Links</p>
+      <ul class="mt-6 space-y-3">
+        {
+          quickLinks.map((l) => (
+            <li>
+              <a href={l.href} class="text-slate-200 hover:text-yellow-400">
+                {l.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Services -->
+    <nav aria-label="Services">
+      <p class="text-lg font-bold">Services</p>
+      <ul class="mt-6 space-y-3">
+        {
+          services.map((l) => (
+            <li>
+              <a href={l.href} class="text-slate-200 hover:text-yellow-400">
+                {l.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Badges + description -->
+    <div class="text-center lg:text-left">
+      <ul class="flex flex-wrap justify-center lg:justify-start gap-2">
+        {
+          badges.map((b) => (
+            <li class="flex w-23 flex-col items-center gap-1 rounded-2xl border-2 border-white/20 bg-white/5 px-1 py-4">
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-slate-400">{b.label}</span>
+              <Icon name={b.icon} class="h-8 w-8" style={b.color ? `color:${b.color}` : undefined} />
+              <span class="text-sm font-bold">{b.name}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 text-sm font-semibold leading-relaxed">
+        {SITE?.name} is a hands-on PPC & digital marketing specialist for lead generation, ecommerce and local businesses.
+      </p>
+      <div class="mt-5 flex flex-wrap justify-center lg:justify-start gap-4 text-sm text-slate-300">
+        <span class="inline-flex items-center gap-2">
+          <Icon name="tabler:brand-upwork" class="h-5 w-5 text-[#14A800]" /> Upwork
+        </span>
+        <span class="inline-flex items-center gap-2">
+          <span class="flex h-5 w-5 items-center justify-center rounded bg-white text-xs font-black text-black">C</span>
+          Contra
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div
+      class="mx-auto max-w-7xl px-4 sm:px-6 py-6 flex flex-col sm:flex-row gap-3 items-center justify-between text-sm text-slate-400"
+    >
+      <p>© {year} {SITE?.name}. All rights reserved.</p>
+      <p class="flex gap-5">
+        <a href={getPermalink('/terms')} class="hover:text-white">Terms</a>
+        <a href={getPermalink('/privacy')} class="hover:text-white">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</footer>

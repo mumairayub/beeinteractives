@@ -1,0 +1,430 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import ClientLogos from '~/components/widgets/ClientLogos.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Comparison from '~/components/widgets/Comparison.astro';
+import Projects from '~/components/widgets/Projects.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import ContactSection from '~/components/widgets/ContactSection.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+/*
+ * Google Ads Services page. Structure modelled on an agency service page:
+ * hero → trust logos → differentiators → why me → comparison → results →
+ * audit CTA → 6-step process → levers → contact → FAQ → final CTA.
+ * Campaign numbers come from Umair's own Google Ads screenshots.
+ */
+
+const metadata = {
+  title: 'Google Ads Management Services',
+  description:
+    'Google Ads management by Umair Ayub: 10+ years running Search, Display, Call and Performance Max campaigns. Work directly with the specialist who builds, audits and optimises your account.',
+};
+
+const auditCta = { variant: 'primary' as const, text: 'Get a free Google Ads audit', href: '#contact' };
+---
+
+<Layout metadata={metadata}>
+  <!-- 1. Hero ************************** -->
+
+  <section class="relative overflow-hidden bg-slate-950 text-white not-prose">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-blue-600/30 blur-3xl"></div>
+      <div class="absolute -bottom-48 right-0 h-[560px] w-[560px] rounded-full bg-violet-600/25 blur-3xl"></div>
+      <div
+        class="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(white_1px,transparent_1px),linear-gradient(90deg,white_1px,transparent_1px)] [background-size:56px_56px]"
+      >
+      </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24 grid gap-12 lg:grid-cols-2 items-center">
+      <div class="text-center lg:text-left">
+        <p
+          class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs sm:text-sm font-semibold uppercase tracking-widest text-blue-300"
+        >
+          <Icon name="flat-color-icons:google" class="h-4 w-4" />
+          Google Ads Management
+        </p>
+        <h1
+          class="mt-6 font-heading font-extrabold uppercase leading-[0.95] tracking-tight text-4xl sm:text-6xl xl:text-7xl"
+        >
+          Grow efficiently<br />
+          with a <span class="bg-gradient-to-r from-blue-400 to-violet-400 bg-clip-text text-transparent"
+            >Google Ads specialist</span
+          >
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto lg:mx-0 text-lg text-slate-300">
+          Work directly with me — the person who builds, audits and manages your campaigns end to end. No account
+          managers, no hand-offs, just 10+ years of hands-on Google Ads experience focused on your leads and sales.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+          <a
+            href="#contact"
+            class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-4 text-base font-bold uppercase tracking-wide text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+          >
+            Get a free Google Ads audit
+            <Icon name="tabler:arrow-right" class="h-5 w-5" />
+          </a>
+          <a
+            href="#results"
+            class="inline-flex items-center gap-2 px-4 py-4 text-base font-semibold text-slate-200 hover:text-white"
+          >
+            See results
+            <Icon name="tabler:chevron-down" class="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-2xl">
+        <div
+          class="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-blue-500 via-blue-600 to-violet-600 opacity-50 blur-xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white shadow-2xl">
+          <Image
+            src="~/assets/images/portfolio/results/account-overview-134k.png"
+            alt="Google Ads account overview: $134K cost, 48.6K clicks, $2.75 average CPC and 41.5K conversions"
+            width={1259}
+            height={429}
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Trust logos ******************* -->
+
+  <ClientLogos />
+
+  <!-- 3. Differentiators *************** -->
+
+  <Features2
+    tagline="How I work"
+    title="No account managers. No layers. No bureaucracy."
+    columns={3}
+    items={[
+      {
+        title: 'No account managers',
+        description:
+          'You talk to the person who actually runs your ads. Questions get answered by the specialist, not passed along a chain.',
+        icon: 'tabler:user-check',
+      },
+      {
+        title: 'No layers',
+        description:
+          'Strategy, setup and day-to-day optimisation are all done by me, so nothing gets lost between teams or hand-offs.',
+        icon: 'tabler:stack-pop',
+      },
+      {
+        title: 'No bureaucracy',
+        description:
+          'Changes happen when the data says so — not after a week of approvals. Fast decisions keep wasted spend low.',
+        icon: 'tabler:bolt',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- 4. Why trust me ****************** -->
+
+  <Features
+    tagline="Why trust me"
+    title="Why businesses trust me with their Google Ads"
+    columns={2}
+    items={[
+      {
+        title: '10+ years of hands-on experience',
+        description:
+          'A master’s degree in Marketing and almost a decade running campaigns for healthcare, legal, education, recruitment and agency brands.',
+        icon: 'tabler:award',
+      },
+      {
+        title: 'Obsessed with performance',
+        description:
+          'Every search term, bid and ad is reviewed against one question: is it bringing in customers at a profitable cost?',
+        icon: 'tabler:chart-arrows-vertical',
+      },
+      {
+        title: 'Honest about what will (and won’t) work',
+        description:
+          'If a budget is too small or a market isn’t right for Google Ads, I’ll tell you before you spend — not after.',
+        icon: 'tabler:message-check',
+      },
+      {
+        title: 'A plan built for your business',
+        description:
+          'No templates. Campaign structure, keywords and bidding are built around your goals, margins and sales cycle.',
+        icon: 'tabler:target-arrow',
+      },
+    ]}
+  />
+
+  <!-- 5. Comparison ******************** -->
+
+  <Comparison
+    tagline="Compare"
+    title="Me vs. a traditional agency vs. a generalist freelancer"
+    mode="versus"
+    columns={[
+      { title: 'Umair Ayub', highlight: true },
+      { title: 'Traditional agency' },
+      { title: 'Generalist freelancer' },
+    ]}
+    rows={[
+      { label: 'Experience level', values: ['10+ years in PPC', 'Varies by account', 'Varies'] },
+      { label: 'Who does the work', values: ['Me, directly', 'Often junior staff', 'The freelancer'] },
+      { label: 'Direct access to the specialist', values: [true, false, true] },
+      { label: 'Strategy built for your business', values: [true, 'Often templated', 'Varies'] },
+      { label: 'Google Ads specialisation', values: [true, true, false] },
+      { label: 'Full conversion tracking setup', values: [true, true, false] },
+      { label: 'Clear accountability for results', values: [true, 'Shared across teams', true] },
+      { label: 'Optimisation frequency', values: ['Several times a week', 'Monthly reviews', 'Varies'] },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Comparison>
+
+  <!-- 6. Results *********************** -->
+
+  <Projects
+    id="results"
+    tagline="Case results"
+    title="Google Ads results"
+    subtitle="Screenshots from live Google Ads accounts I have managed."
+    items={[
+      {
+        title: 'Account overview: $134K spend',
+        description: '$134K managed at a $2.75 average CPC, producing 48.6K clicks.',
+        image: {
+          src: '~/assets/images/portfolio/results/account-overview-134k.png',
+          alt: 'Google Ads overview showing $134K cost and 41.5K conversions',
+        },
+        tags: ['Google Ads', 'Scale'],
+        result: '41.5K conversions',
+      },
+      {
+        title: 'Family Medicine Austin',
+        description: 'Search, call and display campaigns for a healthcare clinic: $64,289 spend, 23,410 clicks.',
+        image: {
+          src: '~/assets/images/portfolio/results/family-medicine-austin-campaigns.png',
+          alt: 'Google Ads campaign summary for Family Medicine Austin',
+        },
+        tags: ['Healthcare', 'Search + Call'],
+        result: 'Up to 10.05% CTR',
+      },
+      {
+        title: 'Ghosheh Law Firm',
+        description: 'English and Spanish search campaigns for accident reports, crash reports and immigration.',
+        image: {
+          src: '~/assets/images/portfolio/results/ghosheh-law-firm-campaigns.png',
+          alt: 'Google Ads campaign summary for Ghosheh Law Firm',
+        },
+        tags: ['Legal', 'Search'],
+        result: '8.68% CTR on Car Crash Report',
+      },
+      {
+        title: 'Account overview: 3.67M impressions',
+        description: '$28.3K spent, generating 3.67M impressions and 10.9K clicks.',
+        image: {
+          src: '~/assets/images/portfolio/results/account-overview-3-67m.png',
+          alt: 'Google Ads overview showing 3.67M impressions and 990 conversions',
+        },
+        tags: ['Google Ads', 'Awareness'],
+        result: '990 conversions',
+      },
+    ]}
+    columns={2}
+  />
+
+  <!-- 7. Audit CTA ********************* -->
+
+  <CallToAction
+    title="Get your free Google Ads audit"
+    subtitle="I'll review your account and show you where budget is being wasted — and where the quick wins are."
+    actions={[auditCta]}
+  />
+
+  <!-- 8. Process *********************** -->
+
+  <Steps
+    tagline="Process"
+    title="How I manage your Google Ads"
+    items={[
+      {
+        title: 'Step 1: Fit-check call',
+        description:
+          'A short call to understand your business, goals and KPIs — and to make sure Google Ads is the right channel for you.',
+        icon: 'tabler:phone-call',
+      },
+      {
+        title: 'Step 2: Account audit',
+        description:
+          'A structured review of your account: tracking, structure, keywords, search terms, bidding and wasted spend.',
+        icon: 'tabler:zoom-check',
+      },
+      {
+        title: 'Step 3: Strategy & architecture',
+        description:
+          'A campaign plan built around your goals: which campaign types, which keywords, how budget is split and why.',
+        icon: 'tabler:sitemap',
+      },
+      {
+        title: 'Step 4: Setup',
+        description:
+          'Campaigns, ads, extensions, audiences and conversion tracking set up properly, using any historical data available.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Step 5: Management & optimisation',
+        description:
+          'Regular checks on search terms, bids and ads. The first month is about learning; after that, optimisation compounds.',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: 'Step 6: Scaling & reporting',
+        description:
+          'Expanding into new keywords and audiences, moving budget to what works, and clear reports focused on decisions.',
+        icon: 'tabler:trending-up',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/portfolio/google-ads-process.webp',
+      alt: 'Google Ads process in four real screenshots: keyword audit, search terms review, campaign structure and spend, and results of 41.5K conversions',
+    }}
+  />
+
+  <!-- 9. Levers ************************ -->
+
+  <Features3
+    tagline="What I optimise"
+    title="The levers that move your results"
+    subtitle="Google Ads performance comes down to a handful of levers. These are the ones I work on every week."
+    columns={3}
+    items={[
+      {
+        title: 'Search intent & search terms',
+        description: 'Targeting the searches that convert and blocking the ones that waste budget.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Budget & bidding',
+        description: 'Putting spend where it earns the most, with bid strategies matched to your goals.',
+        icon: 'tabler:coin',
+      },
+      {
+        title: 'Ad messaging',
+        description: 'Ad copy and assets tested against each other so more of the right people click.',
+        icon: 'tabler:message-2',
+      },
+      {
+        title: 'Audiences & remarketing',
+        description: 'Reaching past visitors and high-value audiences who are most likely to buy.',
+        icon: 'tabler:users-group',
+      },
+      {
+        title: 'Performance Max & Shopping',
+        description: 'Controlled PMax and Shopping campaigns with clean feeds and clear asset groups.',
+        icon: 'tabler:shopping-cart',
+      },
+      {
+        title: 'Conversion tracking & quality',
+        description: 'Accurate GA4 and Google Tag Manager tracking so every decision is based on real data.',
+        icon: 'tabler:chart-dots',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features3>
+
+  <!-- 10. Contact ********************** -->
+
+  <ContactSection formTitle="Get in touch about your Google Ads" />
+
+  <!-- 11. FAQ ************************** -->
+
+  <FAQs
+    tagline="FAQ"
+    title="Google Ads FAQs"
+    schema
+    items={[
+      {
+        title: 'Do I need a specialist to run Google Ads?',
+        description:
+          'Not always. But when mistakes cost more than management would, expert help pays for itself. Even on a small budget, a proper setup avoids a lot of wasted spend.',
+      },
+      {
+        title: 'What does Google Ads management include?',
+        description:
+          'Strategy, campaign setup, keyword and search term management, ad copy, bidding, conversion tracking, ongoing optimisation and reporting.',
+      },
+      {
+        title: 'How quickly will I see results?',
+        description:
+          'Quick wins — like cutting wasted spend — often show within a week or two. Rebuilt or brand-new campaigns usually need a few weeks of data to settle.',
+      },
+      {
+        title: 'What budget do I need?',
+        description:
+          'It depends on your market and cost per click. The budget needs to be large enough to collect useful data; I’ll give you an honest recommendation on our call.',
+      },
+      {
+        title: 'How do you measure success?',
+        description:
+          'By the numbers that matter to your business: cost per lead or sale, lead quality, and revenue — not just clicks or impressions.',
+      },
+      {
+        title: 'Can you fix my account without rebuilding everything?',
+        description:
+          'Yes. Often the best results come from fixing tracking, search terms and structure in the existing account rather than starting over.',
+      },
+      {
+        title: 'Do you work with clients in other countries?',
+        description:
+          'Yes. I have managed campaigns for businesses in the US and the Middle East, and work with clients remotely.',
+      },
+      {
+        title: 'How do you charge?',
+        description: 'Pricing depends on the size and complexity of your account. Get in touch for a quote.',
+      },
+      {
+        title: 'Do you work with ecommerce stores?',
+        description:
+          'Yes — including Shopping and Performance Max campaigns for online stores, with conversion and revenue tracking set up properly.',
+      },
+      {
+        title: 'Do you work with local businesses?',
+        description:
+          'Yes. Healthcare clinics, law firms and service businesses: call campaigns, location targeting and lead tracking.',
+      },
+    ]}
+  />
+
+  <!-- 12. Final CTA ******************** -->
+
+  <CallToAction
+    title="Ready to get more from your Google Ads?"
+    subtitle="Book a free audit and get an honest, specific plan for your account."
+    actions={[auditCta]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </CallToAction>
+</Layout>

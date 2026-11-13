@@ -1,5 +1,5 @@
 site:
-  name: AstroWind
+  name: Umair Ayub
   site: 'https://astrowind.vercel.app'
   base: '/'
   trailingSlash: false

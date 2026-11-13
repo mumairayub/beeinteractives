@@ -1,0 +1,451 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import ClientLogos from '~/components/widgets/ClientLogos.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Projects from '~/components/widgets/Projects.astro';
+import Gallery from '~/components/widgets/Gallery.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import ContactSection from '~/components/widgets/ContactSection.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+/*
+ * Meta Ads (Facebook & Instagram) Services page. Structure modelled on an
+ * agency Meta Ads page: hero + keyword ticker → why the old approach fails →
+ * differentiators → client logos → who I work with → audit CTA → services →
+ * results + creatives → 5-step operating system → contact → FAQ → final CTA.
+ * Results come from Umair's own Meta Ads Manager screenshots (That's Handy).
+ */
+
+const metadata = {
+  title: 'Meta Ads Management Services (Facebook & Instagram)',
+  description:
+    'Facebook and Instagram ads management by Umair Ayub: clean tracking, a controllable account structure, disciplined creative testing and rule-based scaling for leads and sales.',
+};
+
+const auditCta = { variant: 'primary' as const, text: 'Get a free Meta Ads audit', href: '#contact' };
+
+const ticker = [
+  'Smarter targeting',
+  'Clean tracking',
+  'Scalable structure',
+  'Creative testing',
+  'Lower cost per lead',
+  'Results, not promises',
+];
+
+const creatives = [
+  { file: 'ad-19.jpg', caption: "That's Handy — service providers" },
+  { file: 'ad-20.png', caption: "That's Handy — lead ad" },
+  { file: 'ad-08.jpg', caption: "OneContentPro — Women's Day offer" },
+  { file: 'ad-09.jpg', caption: 'OneContentPro — Easter sale' },
+  { file: 'ad-04.png', caption: 'ROI Staffing — hiring ad' },
+  { file: 'ad-06.jpg', caption: 'Xperti — hot jobs' },
+  { file: 'ad-16.png', caption: 'UpBrainery — Summer 2022 offer' },
+  { file: 'ad-12.jpg', caption: 'Vista Book Writing — book trailers' },
+].map(({ file, caption }) => ({ src: `~/assets/images/portfolio/ads/${file}`, alt: caption, caption }));
+---
+
+<Layout metadata={metadata}>
+  <!-- 1. Hero ************************** -->
+
+  <section class="relative overflow-hidden bg-slate-950 text-white not-prose">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-40 -left-40 h-130 w-130 rounded-full bg-blue-600/30 blur-3xl"></div>
+      <div class="absolute -bottom-48 right-0 h-140 w-140 rounded-full bg-fuchsia-600/25 blur-3xl"></div>
+      <div
+        class="absolute inset-0 opacity-[0.07] bg-[linear-gradient(white_1px,transparent_1px),linear-gradient(90deg,white_1px,transparent_1px)] bg-size-[56px_56px]"
+      >
+      </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24 grid gap-12 lg:grid-cols-2 items-center">
+      <div class="text-center lg:text-left">
+        <p
+          class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs sm:text-sm font-semibold uppercase tracking-widest text-blue-300"
+        >
+          <Icon name="tabler:brand-meta" class="h-4 w-4 text-blue-400" />
+          Facebook & Instagram Ads for Leads & Sales
+        </p>
+        <h1
+          class="mt-6 font-heading font-extrabold uppercase leading-[0.95] tracking-tight text-4xl sm:text-6xl xl:text-7xl"
+        >
+          I fix what's broken<br />
+          and <span class="bg-linear-to-r from-blue-400 to-fuchsia-400 bg-clip-text text-transparent"
+            >scale Meta Ads</span
+          >
+        </h1>
+        <p class="mt-6 max-w-xl mx-auto lg:mx-0 text-lg text-slate-300">
+          You run the business. I bring a system built on clean tracking, a structure the algorithm can learn from, and
+          creatives that are tested — not guessed.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+          <a
+            href="#contact"
+            class="inline-flex items-center gap-2 rounded-full bg-blue-600 px-8 py-4 text-base font-bold uppercase tracking-wide text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+          >
+            Get a free Meta Ads audit
+            <Icon name="tabler:arrow-right" class="h-5 w-5" />
+          </a>
+          <span class="inline-flex items-center gap-2 text-sm text-slate-300">
+            <Icon name="tabler:circle-check-filled" class="h-5 w-5 text-emerald-400" />
+            10+ years in paid social & PPC
+          </span>
+        </div>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-2xl">
+        <div
+          class="absolute -inset-3 rounded-4xl bg-linear-to-br from-blue-500 via-violet-500 to-fuchsia-500 opacity-50 blur-xl"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="relative overflow-hidden rounded-4xl border border-white/10 bg-white shadow-2xl">
+          <Image
+            src="~/assets/images/portfolio/results/thats-handy-meta-campaigns.png"
+            alt="Meta Ads Manager campaigns: 309,342 impressions, 31,784 reach, $751.83 spent, leads from $2.78"
+            width={1189}
+            height={520}
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- keyword ticker -->
+    <div class="relative border-t border-white/10 bg-white/5 py-4 overflow-hidden" aria-hidden="true">
+      <div class="meta-ticker flex">
+        {
+          [0, 1].map(() => (
+            <ul class="meta-ticker-track flex shrink-0 items-center gap-10 pr-10 text-sm font-bold uppercase tracking-widest text-slate-300">
+              {ticker.map((word) => (
+                <li class="flex items-center gap-10 whitespace-nowrap">
+                  {word}
+                  <span class="h-1.5 w-1.5 rounded-full bg-fuchsia-400" />
+                </li>
+              ))}
+            </ul>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .meta-ticker-track {
+      animation: meta-ticker 30s linear infinite;
+    }
+    @keyframes meta-ticker {
+      to {
+        transform: translateX(-100%);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .meta-ticker-track {
+        animation: none;
+      }
+    }
+  </style>
+
+  <!-- 2. Why the old approach fails ***** -->
+
+  <Content
+    tagline="Meta Ads today"
+    title="Picking audiences isn't enough anymore"
+    image={{
+      src: '~/assets/images/portfolio/results/thats-handy-meta-ads.png',
+      alt: 'Meta Ads Manager ad-level results for lead generation ads',
+      aspect: 'auto',
+    }}
+    items={[
+      { title: 'Clean tracking: Pixel + Conversions API', icon: 'tabler:target-arrow' },
+      { title: 'An account structure the algorithm can learn from', icon: 'tabler:sitemap' },
+      { title: 'A steady flow of tested creatives', icon: 'tabler:photo-edit' },
+    ]}
+  >
+    <Fragment slot="content">
+      Meta's algorithm now does most of the targeting. What decides your results is the quality of the signals you send
+      it, how your campaigns are structured, and how well your creatives are tested. That's where I focus.
+    </Fragment>
+  </Content>
+
+  <!-- 3. Differentiators *************** -->
+
+  <Features2
+    tagline="How I work"
+    title="Why work with me on Meta Ads"
+    columns={3}
+    items={[
+      {
+        title: '10+ years of hands-on experience',
+        description: 'A specialist who has run paid social and PPC campaigns across many industries — not a junior.',
+        icon: 'tabler:award',
+      },
+      {
+        title: 'Direct access to me',
+        description: 'You talk to the person running your ads. No account managers and no messages lost in between.',
+        icon: 'tabler:user-check',
+      },
+      {
+        title: 'No bureaucracy',
+        description: 'Decisions are made when the data says so, not after a week of internal approvals.',
+        icon: 'tabler:bolt',
+      },
+      {
+        title: 'Honest feedback',
+        description: "If something isn't working — an offer, a landing page, a budget — I'll tell you straight away.",
+        icon: 'tabler:message-check',
+      },
+      {
+        title: 'Fast communication',
+        description: 'Quick replies and clear updates, so you always know what is happening in your account.',
+        icon: 'tabler:clock-bolt',
+      },
+      {
+        title: 'Creative + media in one place',
+        description: 'I design ad creatives as well as running the campaigns, so testing new ideas is fast.',
+        icon: 'tabler:palette',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- 4. Client logos ****************** -->
+
+  <ClientLogos />
+
+  <!-- 5. Who I work with *************** -->
+
+  <Features2
+    tagline="Who I work with"
+    title="Meta Ads for every kind of business"
+    columns={4}
+    items={[
+      {
+        title: 'Lead generation',
+        description: 'Instant forms and landing-page funnels for service businesses that need booked calls.',
+        icon: 'tabler:filter',
+      },
+      {
+        title: 'Local businesses',
+        description: 'Clinics, law firms, home services and more — reaching people nearby who need you now.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Recruitment & staffing',
+        description: 'Hiring campaigns that reach qualified candidates and fill roles faster.',
+        icon: 'tabler:briefcase',
+      },
+      {
+        title: 'Ecommerce & education',
+        description: 'Catalogue, offer and seasonal campaigns for online stores and course providers.',
+        icon: 'tabler:shopping-bag',
+      },
+    ]}
+  />
+
+  <!-- 6. Audit CTA ********************* -->
+
+  <CallToAction
+    title="Get your free Meta Ads audit"
+    subtitle="I'll check your tracking, structure and creatives, and show you exactly what's holding your results back."
+    actions={[auditCta]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </CallToAction>
+
+  <!-- 7. Services ********************** -->
+
+  <Features2
+    tagline="Services"
+    title="Audit, setup and management"
+    subtitle="Everything your Meta Ads account needs, from the foundations to scaling."
+    columns={2}
+    items={[
+      {
+        title: 'Tracking setup',
+        description:
+          'Meta Pixel and Conversions API, event mapping, deduplication and event priority — so Meta optimises for real results.',
+        icon: 'tabler:radar',
+      },
+      {
+        title: 'Ad account setup',
+        description:
+          'Campaigns and ad sets organised by goal and intent, so budget goes where it performs and results are easy to read.',
+        icon: 'tabler:layout-grid',
+      },
+      {
+        title: 'Custom audiences & retargeting',
+        description:
+          'Audiences built from website visitors, customer lists and engagement, plus retargeting that brings people back.',
+        icon: 'tabler:users-group',
+      },
+      {
+        title: 'Management & scaling',
+        description:
+          'Budget control, a regular creative refresh, ad-fatigue monitoring and clear rules for when to scale or cut.',
+        icon: 'tabler:trending-up',
+      },
+    ]}
+  />
+
+  <!-- 8. Results + creatives *********** -->
+
+  <Projects
+    id="results"
+    tagline="Results"
+    title="Meta Ads results"
+    subtitle="From live Meta Ads accounts I have managed for a home-services app and a recruitment firm."
+    columns={3}
+    items={[
+      {
+        title: "That's Handy — campaigns",
+        description:
+          'Lead, traffic and page-like campaigns: 309,342 impressions and 31,784 people reached for $751.83 in total spend.',
+        image: {
+          src: '~/assets/images/portfolio/results/thats-handy-meta-campaigns.png',
+          alt: "Meta Ads Manager campaign results for That's Handy",
+        },
+        tags: ['Lead gen', 'Facebook & Instagram'],
+        result: 'Leads from $2.78 each',
+      },
+      {
+        title: "That's Handy — ads",
+        description: 'Lead ads tested side by side to find the best creative, with link clicks as low as $0.45.',
+        image: {
+          src: '~/assets/images/portfolio/results/thats-handy-meta-ads.png',
+          alt: "Meta Ads Manager ad-level results for That's Handy",
+        },
+        tags: ['Creative testing', 'Lead ads'],
+        result: '$0.45 per link click',
+      },
+      {
+        title: 'Arthur Lawrence — recruitment',
+        description:
+          '37 lead-generation, hiring and engagement campaigns: 3.77M impressions and 2.24M people reached for $21,884.',
+        image: {
+          src: '~/assets/images/portfolio/results/arthur-lawrence-meta-campaigns.png',
+          alt: 'Meta Ads Manager campaign results for Arthur Lawrence',
+        },
+        tags: ['Recruitment', 'Lead gen'],
+        result: '2.24M people reached',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Projects>
+
+  <Gallery
+    tagline="Creatives"
+    title="Ad creatives I've designed"
+    subtitle="A selection of Facebook and Instagram ads. Click any image to enlarge it."
+    columns={4}
+    images={creatives}
+  />
+
+  <!-- 9. Operating system ************** -->
+
+  <Steps
+    tagline="Process"
+    title="My Meta Ads operating system"
+    items={[
+      {
+        title: '1. Diagnose the real constraint',
+        description:
+          'Is it tracking, offer, structure or creative? An audit finds what is actually limiting results — so we fix the right thing first.',
+        icon: 'tabler:stethoscope',
+      },
+      {
+        title: '2. Fix signals & measurement',
+        description:
+          'Pixel and Conversions API set up and checked, the right events prioritised, and reporting you can trust.',
+        icon: 'tabler:radar',
+      },
+      {
+        title: '3. Build a structure you can control',
+        description:
+          'A simple, clear campaign structure that gives the algorithm enough data and makes results easy to compare.',
+        icon: 'tabler:sitemap',
+      },
+      {
+        title: '4. Run a disciplined creative testing loop',
+        description:
+          'New angles, hooks and formats tested on a calendar, with a plan for replacing ads before they fatigue.',
+        icon: 'tabler:repeat',
+      },
+      {
+        title: '5. Scale with rules',
+        description:
+          'Clear thresholds for when to scale, hold or cut — so budget grows on what works, without breaking performance.',
+        icon: 'tabler:trending-up',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/portfolio/meta-ads-process.webp',
+      alt: 'Meta Ads process in four real screenshots: campaign structure, creative testing, ad creatives, and scaling to 2.24M reach across 37 campaigns',
+    }}
+  />
+
+  <!-- 10. Contact ********************** -->
+
+  <ContactSection formTitle="Get in touch about your Meta Ads" />
+
+  <!-- 11. FAQ ************************** -->
+
+  <FAQs
+    tagline="FAQ"
+    title="Meta Ads FAQs"
+    schema
+    items={[
+      {
+        title: 'How much does Meta Ads management cost?',
+        description:
+          'It depends on the size and complexity of your account. After a quick review I can give you a clear quote.',
+      },
+      {
+        title: 'How long until I see results?',
+        description:
+          'The first few weeks go into fixing tracking, structure and testing creatives. Once winners are found, scaling them usually takes another month or two.',
+      },
+      {
+        title: 'Do you also make the ad creatives?',
+        description: 'Yes. I design static ad creatives and social posts as well as managing the campaigns.',
+      },
+      {
+        title: 'What do you need from me to start?',
+        description:
+          'Access to your Meta Business Manager and ad account, your website or landing pages, and a short call about your goals.',
+      },
+      {
+        title: 'Which countries do you work with?',
+        description:
+          'I have run campaigns for businesses in the US and the Middle East, and I work with clients remotely.',
+      },
+    ]}
+  />
+
+  <!-- 12. Final CTA ******************** -->
+
+  <CallToAction
+    title="Ready to fix and scale your Meta Ads?"
+    subtitle="Book a free audit and get an honest, specific plan for your account."
+    actions={[auditCta]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </CallToAction>
+</Layout>
