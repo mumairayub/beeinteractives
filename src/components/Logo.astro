@@ -1,9 +1,23 @@
 ---
-import { SITE } from 'astrowind:config';
+import Image from '~/components/common/Image.astro';
+import logoDark from '~/assets/images/logo/bee-interactives-dark.png';
+
+/*
+ * Site logo (header): the original white-background version (dark
+ * "interactives" text) on a white rounded panel, so it reads cleanly on the
+ * blue header bar. A white-text version for dark backgrounds is at
+ * ~/assets/images/logo/bee-interactives-light.png (used in the footer).
+ */
 ---
 
-<span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
->
-  🚀 {SITE?.name}
+<span class="inline-flex items-center rounded-xl bg-white px-3 py-1.5 shadow-md">
+  <Image
+    src={logoDark}
+    alt="Bee Interactives"
+    width={374}
+    height={244}
+    layout="none"
+    loading="eager"
+    class="h-14 md:h-16 w-auto"
+  />
 </span>

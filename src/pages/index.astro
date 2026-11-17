@@ -50,10 +50,7 @@ const structuredData = [
     url: SITE?.site,
     image: new URL(favIconSvg.src, SITE?.site).toString(),
     sameAs: [
-      'https://www.linkedin.com/in/umairayub/',
-      'https://www.facebook.com/mumairayub',
-      'https://www.instagram.com/umair_ayubb/',
-      'https://twitter.com/Umair_Ayub_',
+      'https://www.facebook.com/beeinteractives/',
       ...(METADATA?.twitter?.handle ? [`https://x.com/${METADATA.twitter.handle.replace(/^@/, '')}`] : []),
     ],
   },
@@ -133,9 +130,8 @@ const ads = [
         </h1>
 
         <p class="mt-6 max-w-xl mx-auto lg:mx-0 text-lg text-slate-300">
-          I'm <span class="font-semibold text-white">Umair Ayub</span> — a digital marketer with 10+ years running Google,
-          Meta and Microsoft Ads for healthcare, legal, education and recruitment brands. You work with me directly, from
-          strategy to reporting.
+          Digital marketing agency with 15+ years of experience running Google, Meta and Microsoft Ads for healthcare,
+          legal, education and recruitment brands.
         </p>
 
         <div class="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
@@ -209,10 +205,10 @@ const ads = [
   <Stats
     countUp
     stats={[
-      { amount: '10+', title: 'Years of experience' },
-      { amount: '$134K', title: 'Spend managed in one Google Ads account' },
-      { amount: '41.5K', title: 'Conversions from that account' },
-      { amount: '3.67M', title: 'Impressions on a single campaign set' },
+      { amount: '15+', title: 'Years of experience' },
+      { amount: '$5M+', title: 'Spend managed' },
+      { amount: '100+', title: 'Clients served' },
+      { amount: '4.99/5', title: 'Client satisfaction' },
     ]}
   />
 
@@ -225,16 +221,24 @@ const ads = [
     image={{ src: '~/assets/images/portfolio/umair-ayub-about.jpg', alt: 'Portrait of Umair Ayub', aspect: '3/4' }}
     classes={{ image: 'max-w-xs lg:max-w-sm' }}
     items={[
-      { title: "Master's degree in Marketing", icon: 'tabler:school' },
-      { title: 'Almost 10+ years of hands-on experience', icon: 'tabler:briefcase' },
-      { title: 'Proven leadership & team management', icon: 'tabler:users' },
-      { title: 'Strong communication & problem-solving skills', icon: 'tabler:bulb' },
+      { title: 'Work directly with the founder', icon: 'tabler:user-check' },
+      { title: 'Hands-on experience across Google, Meta and Microsoft Ads', icon: 'tabler:ad-2' },
+      { title: 'Pixel, Conversions API and CRM tracking', icon: 'tabler:chart-dots' },
+      { title: 'Simple monthly reports that show what’s working', icon: 'tabler:report-analytics' },
     ]}
   >
     <Fragment slot="content">
-      A seasoned digital marketing professional with a master's degree in Marketing and almost 10+ years of sound
-      working experience. A result-oriented self-starter, now looking to make a significant contribution in a Senior
-      Digital Marketing Specialist role toward the success of a growing organization.
+      <figure>
+        <blockquote class="text-xl md:text-2xl font-medium leading-relaxed text-slate-800 dark:text-slate-200">
+          “It’s rare to find people in this industry who truly care about your business. I do, maybe more than I should.
+          I love this work, and I want to do it as well as it can be done.”
+        </blockquote>
+        <figcaption class="mt-5 text-base">
+          <span class="font-bold text-slate-900 dark:text-white">Umair Ayub</span><span
+            class="text-slate-500 dark:text-slate-400">, Founder, Bee Interactives</span
+          >
+        </figcaption>
+      </figure>
     </Fragment>
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>

@@ -1,5 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import logoLight from '~/assets/images/logo/bee-interactives-light.png';
 import { SITE } from 'astrowind:config';
 import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
 
@@ -23,7 +25,11 @@ const services = [
 ];
 
 const contactLines = [
-  { icon: 'tabler:brand-linkedin', text: 'linkedin.com/in/umairayub', href: 'https://www.linkedin.com/in/umairayub/' },
+  {
+    icon: 'tabler:brand-facebook',
+    text: 'facebook.com/beeinteractives',
+    href: 'https://www.facebook.com/beeinteractives/',
+  },
   { icon: 'tabler:mail', text: 'Send me a message', href: getPermalink('/#contact') },
   { icon: 'tabler:map-pin', text: 'Working with clients in the US, Middle East and worldwide' },
 ];
@@ -32,20 +38,21 @@ const socials = [
   {
     label: 'Facebook',
     icon: 'tabler:brand-facebook-filled',
-    href: 'https://www.facebook.com/mumairayub',
+    href: 'https://www.facebook.com/beeinteractives/',
     bg: '#1877F2',
   },
+  // '#' = profile link not set yet
   {
     label: 'LinkedIn',
     icon: 'tabler:brand-linkedin-filled',
-    href: 'https://www.linkedin.com/in/umairayub/',
+    href: '#',
     bg: '#0A66C2',
   },
-  { label: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/umair_ayubb/', bg: '#E1306C' },
+  { label: 'Instagram', icon: 'tabler:brand-instagram', href: '#', bg: '#E1306C' },
   {
     label: 'X (Twitter)',
     icon: 'tabler:brand-x',
-    href: 'https://twitter.com/Umair_Ayub_',
+    href: '#',
     bg: '#ffffff',
     fg: '#000000',
   },
@@ -66,8 +73,16 @@ const year = new Date().getFullYear();
   >
     <!-- Brand, contact, socials -->
     <div>
-      <a href={getPermalink('/')} class="inline-block text-3xl font-extrabold tracking-tight uppercase">
-        {SITE?.name}
+      <a href={getPermalink('/')} class="inline-block" aria-label="Bee Interactives — home">
+        <Image
+          src={logoLight}
+          alt="Bee Interactives"
+          width={374}
+          height={244}
+          layout="none"
+          loading="lazy"
+          class="h-24 md:h-28 w-auto"
+        />
       </a>
       <p class="mt-2 text-sm text-slate-400">Digital Marketing / Pay Per Click (PPC)</p>
 
@@ -99,8 +114,7 @@ const year = new Date().getFullYear();
             <li>
               <a
                 href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(s.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 aria-label={s.label}
                 class="flex h-10 w-10 items-center justify-center rounded-full transition hover:scale-110"
                 style={`background:${s.bg};color:${s.fg ?? '#fff'}`}
